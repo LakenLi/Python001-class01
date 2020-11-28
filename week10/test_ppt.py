@@ -29,6 +29,15 @@ slide_01.shapes[3].text_frame.text = '品牌中心 | 2020.12.29'
 # 第二、三、四张幻灯片不处理
 # 开始处理第五张
 slide_05 = prs.slides[4]
+slide_05.shapes[23].text_frame.text = '8天'                                                  # 替换推广时长
+slide_05.shapes[27].text_frame.text = '11.22-11.29'                                           # 替换推广起止日期
+slide_05.shapes[24].text_frame.text = '2344UV'                                               # 替换专题流量
+slide_05.shapes[28].text_frame.text = '浏览次数3333'                                          # 替换浏览次数
+slide_05.shapes[25].text_frame.text = '300人'                                                # 替换报名人数
+slide_05.shapes[29].text_frame.text = '转化率 ' + str(round(300 / 2344, 4) * 100) + '%'       # 替换转化率
+slide_05.shapes[26].text_frame.text = '211人'                                                # 替换到场人数
+slide_05.shapes[30].text_frame.text = '到场率' + str(round(211 / 300, 4) * 100) + '%'        # 替换到场率
+slide_05.shapes[1].text_frame.text = '注：活动页面从11.22开始上线加入“春雨计划”系列活动推广。'     # 替换注释里的日期
 
 
 # 开始处理第六张
@@ -85,8 +94,13 @@ slide_10.shapes[2].text_frame.text = '注：数据统计范围为11.22-11.27'
 
 # 开始处理第11张
 slide_11 = prs.slides[10]
-
-
+slide_11.shapes[27].text_frame.text = '2333'                                   # 替换活动页数据
+slide_11.shapes[31].text_frame.text = '455'                                    # 替换报名页数据
+slide_11.shapes[32].text_frame.text = '321'                                    # 替换报名成功页数据
+slide_11.shapes[28].text_frame.text = str(round(455 / 2333, 4) * 100) + '%'    # 报名页/活动页
+slide_11.shapes[29].text_frame.text = str(round(321 / 455, 4) * 100) + '%'     # 报名成功页/报名页
+slide_11.shapes[30].text_frame.text = str(round(321 / 2333, 4) * 100) + '%'    # 报名成功页/活动页
+slide_11.shapes[21].text_frame.text = '注：数据统计范围为11.22-11.28。'           # 替换注释日期
 
 # 开始处理第12张
 slide_12 = prs.slides[11]
@@ -203,7 +217,7 @@ para.text = '观众报名来源分布图'    # 标题内容
 para.font.size = Pt(16)    # 字体大小
 
 # 添加表格
-rows, cols = 15, 2  # 设定11行 2列
+rows, cols = 15, 2  # 设定15行 2列
 left = Cm(22)
 top = Cm(5)
 width = Cm(18)
@@ -243,17 +257,121 @@ for row in range(rows): # 循环行
 
 # ==============================================================================================
 # 开始处理第14张
+slide_14 = prs.slides[13]
+
+shapes_14 = slide_14.shapes
+# 添加表格1流量
+rows, cols = 11, 2  # 设定11行 2列
+left = Cm(3)
+top = Cm(5)
+width = Cm(18)
+height = Cm(11)
+table_14_01 = shapes_14.add_table(rows, cols, left, top, width, height).table
+
+table_14_01.columns[0].width=Cm(4) # 列宽
+table_14_01.columns[1].width=Cm(4)
+table_14_01.rows[0].heigth=Cm(5)# 行宽
+# data_01 为第一个流量表格，展示渠道与流量
+data_01=[
+    ['渠道', '流量'],
+    ['弹窗', 729],
+    ['首页banner', 201],
+    ['信息流B01', 162],
+    ['海报1', 114],
+    ['首页轮播', 96],
+    ['APP轮播', 86],
+    ['果园banner', 75],
+    ['海报2', 54],
+    ['开店banner', 53],
+    ['短信', 30]
+]
+
+for row in range(rows): # 循环行
+    for col in range(cols): # 循环列
+        table_14_01.cell(row, col).text_frame.clear()
+        new_cell = table_14_01.cell(row, col).text_frame.paragraphs[0]
+        new_cell.text = str(data_01[row][col])
+        new_cell.font.name = '微软雅黑'
+        new_cell.font.size = Pt(12)
+        new_cell.alignment = PP_PARAGRAPH_ALIGNMENT.CENTER  # 居中
+
+
+# 添加表格2报名
+rows, cols = 11, 2  # 设定11行 2列
+left = Cm(13)
+top = Cm(5)
+width = Cm(18)
+height = Cm(11)
+table_14_02 = shapes_14.add_table(rows, cols, left, top, width, height).table
+
+table_14_02.columns[0].width=Cm(4) # 列宽
+table_14_02.columns[1].width=Cm(4)
+table_14_02.rows[0].heigth=Cm(5)# 行宽
+# data_02 为第一个流量表格，展示渠道与报名
+data_02=[
+    ['渠道', '报名'],
+    ['弹窗', 35],
+    ['首页banner', 14],
+    ['信息流B01', 7],
+    ['海报1', 16],
+    ['首页轮播', 2],
+    ['APP轮播', 8],
+    ['果园banner', 8],
+    ['海报2', 11],
+    ['开店banner', 8],
+    ['短信', 3]
+]
+
+for row in range(rows): # 循环行
+    for col in range(cols): # 循环列
+        table_14_02.cell(row, col).text_frame.clear()
+        new_cell = table_14_02.cell(row, col).text_frame.paragraphs[0]
+        new_cell.text = str(data_02[row][col])
+        new_cell.font.name = '微软雅黑'
+        new_cell.font.size = Pt(12)
+        new_cell.alignment = PP_PARAGRAPH_ALIGNMENT.CENTER  # 居中
+
+
+# 添加表格3转化率
+rows, cols = 11, 2  # 设定11行 2列
+left = Cm(23)
+top = Cm(5)
+width = Cm(18)
+height = Cm(11)
+table_14_03 = shapes_14.add_table(rows, cols, left, top, width, height).table
+
+table_14_03.columns[0].width=Cm(4) # 列宽
+table_14_03.columns[1].width=Cm(4)
+table_14_03.rows[0].heigth=Cm(5)# 行宽
+
+for row in range(rows): # 循环行
+    for col in range(cols): # 循环列
+        table_14_03.cell(row, col).text_frame.clear()
+        new_cell = table_14_03.cell(row, col).text_frame.paragraphs[0]
+        if row == 0 & col == 0 :
+            new_cell.text = '渠道'
+        elif row == 0 & col == 1:
+            new_cell.text = '转化率'
+        else:
+            if col == 0:
+                new_cell.text = data_01[row][col]
+            else:
+                new_cell.text = str(round(data_02[row][col] / data_01[row][col], 4) * 100) + '%'
+        new_cell.font.name = '微软雅黑'
+        new_cell.font.size = Pt(12)
+        new_cell.alignment = PP_PARAGRAPH_ALIGNMENT.CENTER  # 居中
+
 
 i=0
 
 # print(slide_10.shapes.title.text)
 
-for slide in slide_12.shapes:
-
-    if slide.has_text_frame:
-        print('第: {0} 个，文本框内容: {1}'.format(i, slide.text_frame.text))
-
-    i += 1
-
-print(i)
+# for slide in slide_11.shapes:
+#
+#     if slide.has_text_frame:
+#         # print('第: {0} 个，文本框内容: {1}'.format(i, slide.text_frame.text))
+#
+#     i += 1
+#
+# print(i)
 prs.save('test_00411.pptx')
